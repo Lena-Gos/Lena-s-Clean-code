@@ -1,21 +1,8 @@
-import 'book.dart';
+import 'package:srp/book.dart';
 
-class Library {
-  List<Book> books;
-
-  Library() : books = [];
-  void addBook(Book book) {
-    books.add(book);
-  }
-
-  List<Book> getListBooks() {
-    return books;
-  }
-
-  void removeBook(String title) {
-    books.removeWhere((book) => book.title == title);
-  }
-
+class BookSearch {
+  final List<Book> books;
+  BookSearch(this.books);
   Book? getBookByTitle(String title) {
     int index = books.indexWhere((book) => book.title == title);
     if (index == -1) return null;
@@ -32,10 +19,30 @@ class Library {
     return books[index];
   }
 
+  List<Book> getBooksByAuthor(String author) {
+    List<Book> result = [];
+    for (Book book in books) {
+      if (book.author == author) {
+        result.add(book);
+      }
+    }
+    return result;
+  }
+
   Book? getBookByPublicationYear(int publicationYear) {
     int index =
         books.indexWhere((book) => book.publicationYear == publicationYear);
     if (index == -1) return null;
     return books[index];
+  }
+
+  List<Book> getBooksByPublicationYear(int publicationYear) {
+    List<Book> result = [];
+    for (Book book in books) {
+      if (book.publicationYear == publicationYear) {
+        result.add(book);
+      }
+    }
+    return result;
   }
 }
